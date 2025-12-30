@@ -1,62 +1,211 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>지수지수 이지수의 개인 홈페이지에 오신걸 환영합니당</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="이지수 — 인공지능학과. 프로젝트, 연락처, GitHub 링크를 확인하세요." />
+  <title>이지수의 개인 홈페이지</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f6f8;
-      margin: 0;
-      padding: 0;
+    :root{
+      --bg:#f4f6f8;
+      --card:#fff;
+      --text:#0f172a;
+      --muted:#4b5563;
+      --accent:#2563eb;
+      --accent-600:#1d4ed8;
+      --radius:12px;
+      --shadow: 0 6px 20px rgba(16,24,40,0.08);
+      font-family: "Inter", "Noto Sans KR", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text)}
+    a{color:var(--accent);text-decoration:none}
+    .container{max-width:980px;margin:5vh auto;padding:28px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow)}
+    header{display:flex;gap:16px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+    .title {display:flex;align-items:center;gap:14px}
+    /* Avatar with image fallback to initials */
+    .avatar{
+      width:72px;
+      height:72px;
+      border-radius:12px;
+      background:linear-gradient(135deg,#e6eefc,#eef6ff);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:700;
+      color:var(--accent);
+      position:relative;
+      overflow:hidden;
+      flex:0 0 72px;
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .avatar .initials{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:0.95rem;
+      letter-spacing:0.02em;
+      background:linear-gradient(135deg,#e6eefc,#eef6ff); /* visible if image missing */
     }
 
-    .container {
-      max-width: 600px;
-      margin: 100px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
+    h1{margin:0;font-size:1.5rem}
+    p.lead{margin:4px 0 0;color:var(--muted)}
 
-    h1 {
-      margin-bottom: 10px;
-    }
+    .grid{display:grid;grid-template-columns:1fr 320px;gap:24px;margin-top:18px}
+    @media (max-width:860px){ .grid{grid-template-columns:1fr} .aside{order:2} }
 
-    p {
-      color: #555;
-    }
+    /* profile card */
+    .card{background:#fff;border-radius:10px;padding:16px;box-shadow:0 4px 12px rgba(15,23,42,0.04)}
+    .info-list{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+    .info-item{display:flex;justify-content:space-between;padding:10px;border-radius:8px;background:#f8fafc;font-weight:600;color:#0f172a}
 
-    ul {
-      list-style: none;
-      padding: 0;
-    }
+    /* projects */
+    .projects{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    @media (max-width:700px){ .projects{grid-template-columns:1fr} }
+    .proj{padding:14px;border-radius:10px;background:linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);border:1px solid #eef2ff}
+    .proj h3{margin:0 0 6px;font-size:1rem}
+    .proj p{margin:0;color:var(--muted);font-size:0.95rem}
 
-    li {
-      margin: 8px 0;
-    }
+    /* actions & socials */
+    .btn {display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border-radius:10px;background:var(--accent);color:white;font-weight:700}
+    .socials{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+    .socials a{display:inline-flex;align-items:center;gap:8px;padding:8px 10px;border-radius:10px;background:#f8fafc;color:var(--text);font-weight:600}
+
+    footer{margin-top:20px;color:var(--muted);font-size:0.9rem;text-align:center}
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .link-inline{color:var(--accent);font-weight:700}
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <h1>이지수의 개인 홈페이지</h1>
-    <p>GitHub Pages를 이용한 개인 홈페이지입니다.</p>
+  <main class="container" role="main" aria-labelledby="page-title">
+    <header>
+      <div class="title" aria-hidden="false">
+        <div class="avatar" aria-hidden="false" title="프로필 사진">
+          <!-- 기본 경로: assets/profile.jpg
+               사용 방법:
+               - 로컬 이미지 추가: assets/profile.jpg (또는 변경)
+               - 외부 이미지 사용: src="https://example.com/yourphoto.jpg"
+          -->
+          <img src="assets/profile.jpg" alt="프로필 사진 — 이지수" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="initials" style="display:none">이지수</div>
+        </div>
 
-    <ul>
-      <li>이름: 이지수</li>
-      <li>학과: 인공지능학과</li>
-      <li>학번: 12502962</li>
-    </ul>
+        <div>
+          <h1 id="page-title">이지수 — 서울 사이버대학교 인공지능학과</h1>
+          <p class="lead">학생 / 프로젝트와 모델 실험을 좋아합니다. (학번: 12502962)</p>
+        </div>
+      </div>
 
-    <p>
-      <a href="https://github.com/kkkjjj" target="_blank">
-        GitHub 바로가기
-      </a>
-    </p>
-  </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+        <a class="btn" href="https://github.com/kkkjjj" target="_blank" rel="noopener noreferrer">GitHub 방문</a>
+        <a class="muted" href="/resume.pdf" target="_blank" rel="noopener noreferrer">이력서 다운로드</a>
+      </div>
+    </header>
+
+    <div class="grid" style="align-items:start">
+      <section aria-label="주요 콘텐츠">
+        <div class="card" style="margin-bottom:12px">
+          <h2 style="margin:0 0 8px">프로젝트</h2>
+          <p class="muted" style="margin:0 0 12px">선택한 프로젝트들을 소개합니다. 원하시면 각 프로젝트에 이미지, 데모 링크, 소스 링크를 추가할게요.</p>
+
+          <div class="projects" aria-label="프로젝트 목록">
+            <article class="proj" aria-labelledby="p1">
+              <h3 id="p1">프로젝트 A — 이미지 분류 모델</h3>
+              <p>PyTorch 기반 커스텀 CNN으로 도메인 적응 실험을 수행했습니다. F1 0.92 달성. <a class="link-inline" href="#">자세히 보기</a></p>
+            </article>
+
+            <article class="proj" aria-labelledby="p2">
+              <h3 id="p2">프로젝트 B — 챗봇</h3>
+              <p>사용자 질의 응답용 경량 챗봇. Flask + Transformer 기반 파이프라인. <a class="link-inline" href="#">데모</a></p>
+            </article>
+
+            <article class="proj" aria-labelledby="p3">
+              <h3 id="p3">프로젝트 C — 데이터 시각화 대시보드</h3>
+              <p>D3.js와 React로 만든 실시간 대시보드. 데이터 파이프라인 자동화 포함. <a class="link-inline" href="#">레포</a></p>
+            </article>
+
+            <article class="proj" aria-labelledby="p4">
+              <h3 id="p4">프로젝트 D — 개인 연구 노트</h3>
+              <p>논문 요약과 실험 로그를 정리한 노트(공개/비공개 옵션). <a class="link-inline" href="#">노트 보기</a></p>
+            </article>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2 style="margin:0 0 8px">연락처</h2>
+          <p class="muted" style="margin:0 0 12px">질문, 협업 제안은 아래 링크로 연락 주세요.</p>
+          <ul class="info-list" style="margin-top:8px">
+            <li class="info-item"><span>이메일</span><a href="mailto:youremail@example.com" class="link-inline">youremail@example.com</a></li>
+            <li class="info-item"><span>학과</span><span>인공지능학과</span></li>
+            <li class="info-item"><span>학번</span><span>12502962</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <aside class="aside">
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;align-items:stretch">
+          <div>
+            <h3 style="margin:0 0 6px">한눈에 보기</h3>
+            <p class="muted" style="margin:0">간단한 프로필 요약과 SNS 링크</p>
+          </div>
+
+          <div>
+            <strong>이름</strong>
+            <div class="muted">이지수</div>
+          </div>
+
+          <div>
+            <strong>SNS</strong>
+            <div class="socials" role="list">
+              <a href="https://github.com/kkkjjj" target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub</a>
+              <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn</a>
+              <a href="mailto:youremail@example.com" aria-label="Email">Email</a>
+            </div>
+          </div>
+
+          <div>
+            <strong>기술 스택</strong>
+            <div class="muted">Python · PyTorch · React · Flask · Docker</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <p>© 2025 이지수. 이 페이지는 GitHub Pages로 호스팅될 수 있습니다.</p>
+    </footer>
+  </main>
+
+  <script>
+    // 이미지가 로드되지 않을 때 이니셜 표시 처리 (추가 보완)
+    document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.avatar').forEach(function (av) {
+        var img = av.querySelector('img');
+        var initials = av.querySelector('.initials');
+        if (!img) {
+          initials.style.display = 'flex';
+        } else {
+          // if image has already failed to load, onerror handler above will hide it and show initials.
+          img.addEventListener('error', function () {
+            img.style.display = 'none';
+            initials.style.display = 'flex';
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
